@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>chapter21</title>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Aspect-oriented software engineering</h1>
+            </header>
+            <main>
+            <section>
+                <p>
+                    In most large systems, the relationships between the requirements and the program
+                        components are complex. A single requirement may be implemented by a number of
+                        components and each component may include elements of several requirements. 
+                        In practice, this means that implementing a change to the requirements may involve
+                        understanding and changing several components. Alternatively, a component may
+                        provide some core functionality but also include code that implements several system
+                        requirements. Even when there appears to be significant reuse potential, it may be
+                        expensive to reuse such components. Reuse may involve modifying them to remove
+                        extra code that is not associated with the core functionality of the component.
+                </p>
+                <p>
+                    Aspect-oriented software engineering (AOSE) is an approach to software development that is intended to address this problem and so make programs easier to
+                        maintain and reuse. AOSE is based around abstractions called aspects, which
+                        implement system functionality that may be required at several different places in a
+                        program. Aspects encapsulate functionality that cross-cuts and coexists with other
+                        functionality that is included in a system. They are used alongside other abstractions such as objects and methods. An executable aspect-oriented program is
+                        created by automatically combining (weaving) objects, methods, and aspects,
+                        according to specifications that are included in the program source code.
+                </p>
+                <p>
+                    An important characteristic of aspects is that they include a definition of where
+                        they should be included in a program, as well as the code implementing the crosscutting concern. You can specify that the cross-cutting code should be included
+                        before or after a specific method call or when an attribute is accessed. Essentially,
+                        the aspect is woven into the core program to create a new augmented system.
+                </p>
+                <p>
+                    The key benefit of an aspect-oriented approach is that it supports the separation of
+                        concerns. As I explain in Section 21.1, separating concerns into independent elements rather than including different concerns in the same logical abstraction is good
+                        software engineering practice. By representing cross-cutting concerns as aspects,
+                        these concerns can be understood, reused, and modified independently, without
+                        regard for where the code is used. For example, user authentication may be represented as an aspect that requests a login name and password. This can be automatically woven into the program wherever authentication is required.
+                </p>
+                <p>
+                    Say you have a requirement that user authentication is required before any change
+                        to personal details is made in a database. You can describe this in an aspect by stating that the authentication code should be included before each call to methods that
+                        update personal details. Subsequently, you may extend the requirement for authentication to all database updates. This can easily be implemented by modifying the
+                        aspect. You simply change the definition of where the authentication code is to be
+                        woven into the system. You do not have to search through the system looking for all
+                        occurrences of these methods. You are therefore less likely to make mistakes and
+                        introduce accidental security vulnerabilities into your program
+                </p>
+                <p>
+                    Research and development in aspect-orientation has primarily focused on aspectoriented programming. Aspect-oriented programming languages such as AspectJ
+                        (Colyer and Clement, 2005; Colyer et al., 2005; Kiczales, et al., 2001; Laddad,
+                        2003a; Laddad, 2003b) have been developed that extend object-oriented programming to include aspects. Major companies have used aspect-oriented programming
+                        in their software production processes (Colyer and Clement, 2005). However, crosscutting concerns are equally problematic at other stages of the software development
+                        process. Researchers are now investigating how to utilize aspect-orientation in system requirements engineering and system design, and how to test and verify aspectoriented programs
+                </p>
+                <p>
+                    I have included a discussion of AOSE here because its focus on separating concerns is an important way of thinking about and structuring a software system.
+                        Although some large-scale systems have been implemented using an aspect-oriented
+                        approach, the use of aspects is still not part of mainstream software engineering. As
+                        with all new technologies, advocates focus on the benefits rather than the problems
+                        and costs. Although it will be some time before AOSE is routinely used alongside
+                        other approaches to software engineering, the idea of separating concerns that underlies AOSE are important. Thinking about the separation of concerns is a good general approach to software engineering.
+                </p>
+                <p>
+                    In the remaining sections of the chapter, I therefore focus on the concepts that are
+                        part of AOSE and discuss the advantages and disadvantages of using an aspectoriented approach at different stages of the software development process. As my
+                        aim is to help you understand the concepts underlying AOSE, I do not go into detail
+                        of any specific approach or aspect-oriented programming language.
+                </p>
+            </section>
+                    <section>
+                        <h2>21.1 The separation of concerns</h2>
+                        <p>The separation of concerns is a key principle of software design and implementation.
+                            It means that you should organize your software so that each element in the program
+                            (class, method, procedure, etc.) does one thing and one thing only. You can then
+                            focus on that element without regard for the other elements in the program. You can
+                            understand each part of the program by knowing its concern, without the need to
+                            understand other elements. When changes are required, they are localized to a small
+                            number of elements.</p>
+                        <p>The importance of separating concerns was recognized at an early stage in the
+                            history of computer science. Subroutines, which encapsulate a unit of functionality,
+                            were invented in the early 1950s and subsequent program structuring mechanisms
+                            such as procedures and object classes have been designed to provide better mechanisms for realizing the separation of concerns. However, all of these mechanisms
+                            have problems in dealing with certain types of concern that cut across other concerns. These cross-cutting concerns cannot be localized using structuring mechanisms such as objects or functions. Aspects have been invented to help manage these
+                            cross-cutting concerns.</p>
+                        <p>Although it is generally agreed that separating concerns is good             software        engineering practice, it is harder to pin down what is         actually meant by a concern. Sometimes
+                            it is defined as a functional notion (i.e., a concern is some element of functionality in
+                            a system). Alternatively, it may be defined very broadly as ‘any piece of interest orfocus in a program’. Neither of these definitions is particularly useful in practice.
+                            Concerns certainly are more than simply functional elements but the more general
+                            definition is so vague that it is practically useless.</p>
+                        <p>In my view, most attempts to define concerns are problematic because they
+                            attempt to relate concerns to programs. In fact, as discussed by Jacobson and Ng
+                            (2004), concerns are really reflections of the system requirements and priorities of
+                            stakeholders in the system. System performance may be a concern because users
+                            want to have a rapid response from a system; some stakeholders may be concerned
+                            that the system should include particular functionality; companies who are supporting a system may be concerned that it is easy to maintain. A concern can therefore be
+                            defined as something that is of interest or significance to a stakeholder or a group of
+                            stakeholders.</p>
+                            If you think of concerns as a way of organizing requirements, you can see why an
+                            approach to implementation that separates concerns into different program elements is
+                            good practice. It is easier to trace concerns, expressed as a requirement or a related set
+                            of requirements, to the program components that implement these concerns. If the
+                            requirements change, then the part of the program that has to be changed is obvious.
+                            
+                    <section>
+                        <h4>There are several different types of stakeholder concern</h4>
+                        <ol>
+                            <li>Functional concerns, which are related to the specific functionality        to     be included
+                                in a system. For example, in a train control system, a specific functional concern
+                                is train braking.</li>
+                            <li>Quality of service concerns, which are related to the non-functional behavior of
+                                a system. These include characteristics such as performance, reliability, and
+                                availability.</li>
+                            <li>Policy concerns, which are related to the overall policies that govern the use of
+                                a system. Policy concerns include security and safety concerns and concerns
+                                related to business rules</li>
+                            <li>System concerns, which are related to attributes of the system as a whole, such
+                                as its maintainability or its configurability</li>
+                            <li>Organizational concerns, which are related to organizational goals and priorities. These include producing a system within budget, making use of existing
+                                software assets, and maintaining the reputation of the organization</li>
+
+                                <img src="Screenshot 2025-09-06 153327.png" alt="">
+                                <h4>Figure 21.1 Crosscutting concerns</h4>
+                        </ol>
+
+                <section>
+
+                    </section>
+                    <p>A data acquisition system involves a producer and consumer process putting data in a shared buffer, with the main function being to add and remove elements. Synchronization is crucial to prevent interference between processes, ensuring that neither overwrites un consumed data nor takes data from empty buffers.</p>
+                    <p>Secondary concerns, such as service quality and organizational policies, are cross-cutting concerns that apply to the entire system, while secondary functional concerns may be cross-cutting but are associated with core concerns providing related functionality.</p>
+                    <p>Figure 21.1 illustrates cross-cutting concerns in an Internet banking system, focusing on new customer requirements like credit checking and address verification, existing customer management, and customer account management. These concerns are core to the system's primary purpose of providing internet banking services, affecting the implementation of other system requirements.</p>
+                    <p>Programming language abstractions, such as procedures and classes, are the
+                        mechanism that you normally use to organize and structure the core concerns of a
+                        system. However, the implementation of the core concerns in conventional programming languages usually includes additional code to implement the cross-cutting,
+                        functional, quality of service, and policy concerns. This leads to two undesirable
+                        phenomena: tangling and scattering</p>
+                    <img src="Screenshot 2025-09-06 153302.png" alt="">
+                    <h4>Figure 21.2 Tangling 
+                            of buffer management
+                            and synchronization
+                            code</h4>
+                    </section>
+                <section>
+                    <p>Tangling occurs when a system module includes code that implements different system requirements. In a bounded buffer system, the put operation adds an item to the buffer, while the get operation removes it. The code supporting the primary concern is tangled with code implementing synchronization, which ensures mutual exclusion and must be included in all methods accessing the shared buffer.</p>
+                    <p>The related phenomenon of scattering occurs when the implementation of a single concern (a logical requirement or set of requirements) is scattered across several
+                        components in a program. This is likely to occur when requirements related to secondary functional concerns or policy concerns are implemented.</p>
+                    <p>For example, say a medical record management system, such as the MHC-PMS,
+                            has a number of components concerned with managing personal information, medication, consultations, medical images, diagnoses, and treatments. These implement
+                            the core concern of the system: maintaining records of patients. The system can be
+                            configured for different types of clinic by selecting the components that provide the
+                            functionality needed for the clinic.
+                    </p>
+                    <p>
+                        However, assume there is also an important secondary concern which is the maintenance of statistical information; the health code provider wishes to record details of
+                            how many patients were admitted and discharged each month, how many patients
+                            died, what medications were issued, the reasons for consultations, and so on. These
+                            requirements have to be implemented by adding code that anonymizes the data 
+                            (to maintain patient privacy) and writes it to a statistical database. A statistics component processes the statistical data and generates the statistic reports that are required.
+                    </p>
+                </section>
+                <section>
+                    <img src="Screenshot 2025-09-06 155502.png" alt="">
+                    <h4>Figure 21.4</h4>
+                    <p>Terminology used inaspect-orientedsoftware engineering</p>
+
+                    <p>However, this organization means that information in the database has to be
+                        updated from a number of different places in the system. For example, patient information may be modified when their personal details change, when their assigned
+                        medication changes, when they are assigned to a new specialist, etc. For simplicity,
+                        assume that all components in the system use a consistent naming strategy and that
+                        all database updates are implemented by methods starting with ‘update’. There are
+                        therefore methods in the system such as:</p>
+                    <img src="Screenshot 2025-09-06 155921.png" alt="">
+                    <p>
+                        The patient is identified by patientId and the changes to be made are encoded in
+                        the second parameter; the details of this encoding are not important for this example.
+                        Updates are made by hospital staff, who are logged into the system.
+                    </p>
+
+                </section>
+                <section>
+                    <p>One way of implementing this new policy is to modify the update method in each
+                        component to call other methods to do the authentication and logging. Alternatively,</p>
+                
+                        <img src="Screenshot 2025-09-06 160155.png" alt="">
+                        <h4>Figure 21.5 An</h4>
+                        <p>authentication aspect</p>
+
+                        <p>the system could be modified so that each time an update method is called, method
+                            calls are added before the call to do the authentication, and then after to log the
+                            changes made. However, neither of these is a very good solution to this problem:</p>            
+                
+                    </section>
+                    <section>
+                        <ol>
+                            <li>The first approach leads to a tangled implementation. Logically, updating a
+                                    database, authenticating the originator of an update, and logging details of the
+                                    update are separate, unrelated concerns. You may wish to include authentication
+                                    elsewhere in the system without logging or may wish to log actions apart from
+                                    the update action. The same authentication and logging code has to be included
+                                    within several different methods</li>
+                            <li>The alternative approach leads to a scattered implementation. If you explicitly
+                                    include method calls to do authentication and logging before and after every call
+                                    to the update methods, then this code is included at several different places in
+                                    the system.</li>
+                            <p>Authentication and logging cut across the core concerns of the system and may
+                                    have to be included in several different places. In an aspect-oriented system, you can
+                                    represent these cross-cutting concerns as separate aspects. An aspect includes a
+                                    specification of where the cross-cutting concern is to be woven into the program, and
+                                    code to implement that concern. This is illustrated in Figure 21.5, which defines an
+                                    authentication aspect. The notation that I use in this example follows the style of
+                                    AspectJ but uses a simplified syntax, which should be understandable without
+                                    knowledge of either Java or AspectJ.</p>
+                        </ol>
+                    </section>
+
+                <section>
+                    <p>In this example, the pointcut is a simple statement:</p>
+                    <img src="Screenshot 2025-09-06 160731.png" alt="">
+                    <p>The meaning of this is that before the execution of any method whose name starts
+                        with the string update, followed by any other sequence of characters, the code in the
+                        aspect after the pointcut definition should be executed. The character * is called a
+                        wildcard and matches any string characters that are allowed in identifiers. The code
+                        to be executed is known as the ‘advice’ and is the implementation of the crosscutting concern. In this case, the advice gets a password from the person requesting
+                        the change and checks that it matches the password of the currently logged-in user. 
+                        If not, the user is logged out and the update does not proceed.</p>
+                    <p>There are many possible types of event that may occur during program execution.
+                            A join point model defines the set of events that can be referenced in an aspectoriented program. Join point models are not standardized and each aspect-oriented
+                            programming language has its own join point model. For example, in AspectJ events
+                            that are part of the join point model include:</p>
+                        <section>
+                            <article>
+                                <ol>
+                                    <li>call events—calls to a method or a constructor;</li>
+                                    <li>execution events—the execution of a method or a constructor;</li>
+                                    <li>initialization events—class or object initialization;</li>
+                                    <li>data events—accessing or updating of a field;</li>
+                                    <li>exception events—the handling of an exception.</li>
+                                </ol>
+                            </article>
+                        </section>
+                </section>
+                    
+        </main>
+
+
+        
+        </main>
+        <footer>
+
+        </footer>
+    
+        </body>
+    </head>
+</html>
