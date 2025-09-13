@@ -1,0 +1,23 @@
+*/ Header */
+
+.title{
+    background-color: rgb(193, 149, 93);
+}
+*/ Main */
+
+.main{
+    background-color: beige;
+    font-size: small;
+    text-align: center;
+    
+}
+
+.picture{
+    text-align: center;
+}
+
+p{
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+
