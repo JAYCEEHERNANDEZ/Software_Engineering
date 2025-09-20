@@ -1,0 +1,121 @@
+body{
+    background-color: var(--header-footer-color);
+    font-family: "Crimson Text", serif;
+    margin: 0;
+}
+
+:root{
+    --primary-color:  #705068;
+    --secondary-color: #f54ad0;
+    --tertiary-color: #FFFFF0;
+    --header-footer-color: #280137;
+    --box-shadow-color: #44444e;
+}
+ /*button related*/
+button{
+    background-color: var(--primary-color);
+    color: var(--tertiary-color);
+    font-size: 18px;
+    font-family: "Crimson Text", serif;
+    padding: 10px;
+    margin: 3px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+}
+button:hover{
+    background-color: var(--secondary-color);
+    color: var(--header-footer-color);
+    box-shadow: 1px 3px 3px 3px  var(--hover);;
+}
+ /*button related*/
+
+ /*header related & footer related*/
+header{
+    text-align: left;
+    background-color:var(--header-footer-color);
+    box-shadow: var(--secondary-color) 2px 4px 8px;
+    color: var(--tertiary-color);
+    padding:1px 1px 1px 20px;
+    margin: 10px;
+    font-size: 35PX;
+    text-decoration: #f54ad0 var(--box-shadow-color);
+}
+footer{
+    text-align: center;
+    text-decoration: none;
+    color: var(--tertiary-color);
+    padding: 15px;
+    font-size: 18PX;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+/*header related & footer related*/
+
+.sidebar{
+    grid-area: sidebar;
+    display: flex;
+
+}
+
+/*main related*/
+main{
+    margin:0 8%;
+    color: var(--tertiary-color);
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
+}
+/*main related*/
+p{
+    margin: 10px;
+    padding: 10px;
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 1.6;
+    font-size: 18px;
+    text-indent: 55px;
+}
+
+a{
+    text-decoration: none;
+    color: inherit
+}
+
+h1, h2, h3{
+   font-style: italic;
+}
+
+figure{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.caption{
+    font-size: 15px;
+    font-style: italic;
+    text-align: center;
+    text-decoration: none;
+}
+
+section{
+    margin-top: 2%;
+    padding: 1%;
+    border-color: 10px solid var(--tertiary-color);
+    box-shadow: 5px 5px 15px var(--secondary-color);
+    border-radius: 8px;
+    background-color: var(--header-footer-color);
+    color: var(--tertiary-color);
+}
+.article{
+    margin-bottom: 5%;
+    padding: 2%;
+    background-color: var(--header-footer-color);
+    color: var(--tertiary-color);
+}
