@@ -1,0 +1,38 @@
+.title{
+    background-color: #fff8dc;
+    border-radius: 50px;
+    margin: 6%;
+    border: 40%;
+    font-size: x-large;
+
+}
+header{
+    border: 50px;
+    height: 100vh;
+    padding: 20px;
+}
+
+main{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: larger;
+    background-color: #f5f5dc;
+    background-color: #e9967a;
+    background-color:#fff8dc;
+    font-size: medium;
+    text-align: center;
+}
+
+.picture{
+    text-align: center;
+}
+
+:root{
+    color-scheme: #f5f5dc, #e9967a, #fff8dc, #fff8dc;
+}
+
+footer{
+    background-color: cornsilk;
+    margin: 30%;
+    border: 50px;
+    border-radius: 50px;
+}
