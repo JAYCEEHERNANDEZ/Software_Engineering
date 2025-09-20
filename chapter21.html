@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>chapter21</title>
+    <link rel="stylesheet" href="chapter21.css">
 </head>
 <body>
+    <header>
+            <h1>Chapter 21: Aspect-oriented software engineering</h1>
+             </header>
+    
     <main>
-        <header>
-            <h1>Aspect-oriented software engineering</h1>
-            </header>
-            <main>
+        
             <section>
                 <p>
                     In most large systems, the relationships between the requirements and the program
@@ -75,8 +77,9 @@
                         aim is to help you understand the concepts underlying AOSE, I do not go into detail
                         of any specific approach or aspect-oriented programming language.
                 </p>
+                
             </section>
-                    <section>
+                    <SEction>
                         <h2>21.1 The separation of concerns</h2>
                         <p>The separation of concerns is a key principle of software design and implementation.
                             It means that you should organize your software so that each element in the program
@@ -109,10 +112,10 @@
                             good practice. It is easier to trace concerns, expressed as a requirement or a related set
                             of requirements, to the program components that implement these concerns. If the
                             requirements change, then the part of the program that has to be changed is obvious.
-                            
+                        </SEction>
                     <section>
                         <h4>There are several different types of stakeholder concern</h4>
-                        <ol>
+                        <ul>
                             <li>Functional concerns, which are related to the specific functionality        to     be included
                                 in a system. For example, in a train control system, a specific functional concern
                                 is train braking.</li>
@@ -129,11 +132,12 @@
 
                                 <img src="Screenshot 2025-09-06 153327.png" alt="">
                                 <h4>Figure 21.1 Crosscutting concerns</h4>
-                        </ol>
+                        </ul>
 
-                <section>
+                
 
                     </section>
+                    <section>
                     <p>A data acquisition system involves a producer and consumer process putting data in a shared buffer, with the main function being to add and remove elements. Synchronization is crucial to prevent interference between processes, ensuring that neither overwrites un consumed data nor takes data from empty buffers.</p>
                     <p>Secondary concerns, such as service quality and organizational policies, are cross-cutting concerns that apply to the entire system, while secondary functional concerns may be cross-cutting but are associated with core concerns providing related functionality.</p>
                     <p>Figure 21.1 illustrates cross-cutting concerns in an Internet banking system, focusing on new customer requirements like credit checking and address verification, existing customer management, and customer account management. These concerns are core to the system's primary purpose of providing internet banking services, affecting the implementation of other system requirements.</p>
@@ -210,6 +214,7 @@
                                     include method calls to do authentication and logging before and after every call
                                     to the update methods, then this code is included at several different places in
                                     the system.</li>
+                            
                             <p>Authentication and logging cut across the core concerns of the system and may
                                     have to be included in several different places. In an aspect-oriented system, you can
                                     represent these cross-cutting concerns as separate aspects. An aspect includes a
@@ -220,6 +225,7 @@
                                     knowledge of either Java or AspectJ.</p>
                         </ol>
                     </section>
+                    
 
                 <section>
                     <p>In this example, the pointcut is a simple statement:</p>
@@ -235,8 +241,8 @@
                             A join point model defines the set of events that can be referenced in an aspectoriented program. Join point models are not standardized and each aspect-oriented
                             programming language has its own join point model. For example, in AspectJ events
                             that are part of the join point model include:</p>
-                        <section>
-                            <article>
+                        
+                            
                                 <ol>
                                     <li>call events—calls to a method or a constructor;</li>
                                     <li>execution events—the execution of a method or a constructor;</li>
@@ -244,14 +250,14 @@
                                     <li>data events—accessing or updating of a field;</li>
                                     <li>exception events—the handling of an exception.</li>
                                 </ol>
-                            </article>
-                        </section>
+                            
+                        
                 </section>
                 <section>
                         <p>A pointcut identifies the specific event(s) (e.g., a call to a named procedure) with
                             which advice should be associated. This means that you can weave advice into a program in many different contexts, depending on the join point model that is supported:
                             </p>
-                            <section>
+                            
                                 <ol>
                                     <li>
                                         Advice can be included before the execution of a specific method, a list of
@@ -268,7 +274,7 @@
                                             advice to monitor or change that field.</li>
                                    
                                 </ol>
-                            </section>
+                            
                 </section>
                 <section>
                         <p>The inclusion of advice at the join points specified in the pointcuts is the responsibility of an aspect weaver. Aspect weavers are extensions to compilers that process
@@ -281,7 +287,7 @@
                                 The weaver then generates a new program with the aspects included at the specified
                                 join points. The aspects are integrated so that the cross-cutting concerns are executed
                                 at the right places in the final system.</p>
-                        <section>
+                        
                             <ol>
                                 <li>Source code pre-processing, where a weaver takes source code input and generates new source code in a language such as Java or C++, which can then be compiled using the standard language compiler. This approach has been adopted for
                                     the AspectX language with its associated XWeaver (Birrer et al., 2005).</li>
@@ -291,7 +297,7 @@
                                     when an event that is referenced in a pointcut occurs, the corresponding advice
                                     is integrated with the executing program</li>
                             </ol>
-                        </section>
+                        
 
                         <p>The most commonly used approach to aspect weaving is link time weaving, as this
                             allows for the efficient implementation of aspects without a large run-time overhead.
@@ -319,7 +325,7 @@
                     </p>
                     <p>There are several different types of extension that are derived from the different
                         types of concern that I discussed in Section 21.1.</p>
-
+            </section>
                         <section>
                             <ol>
                                 <li>Secondary functional extensions These add additional capabilities to the functionality provided in the core system. For instance, using the example of the MHCPMS, the production of reports on the drugs prescribed in the previous month
@@ -341,7 +347,7 @@
                                 </li>
 
                             </ol>
-                        </section>
+                        
                             <img src="image copy.png" alt="">
                                  <h4>Figure 21.7 </h4>
                                     <p>Core Extension 4 Extension 5 Extension 6 system with extensions</p>
@@ -365,7 +371,7 @@
                             1996). These methods separate the concerns of different stakeholders. Viewpoints
                             reflect the distinct functionality that is required by different stakeholder groups.
                             </p> 
-                            <!--  -->
+                        
                         <p>However, there are also requirements which cross-cut all viewpoints, as shown
                             in Figure 21.8. This diagram shows that viewpoints may be of different types but
                             cross-cutting concerns (such as regulation, dependability, and security) generate
@@ -403,6 +409,7 @@
                                 <p>The outcome of the requirements engineering process should be a set of requirements that are structured around the notion of a core system plus extensions. For
                                     example, in the inventory system, examples of core requirements might be:
                                     </p>
+                            </section>
                                 <section>
                                     <ol>
                                         <li>C.1 The system shall allow authorized users to view the description of any item of
@@ -423,6 +430,8 @@
                                                             limits the freedom of designers and may result in a system design that cannot meet
                                                             its quality of service requirements.</p>
                                     </ol>
+                                    </section>
+                                    <section>
                                     <p>Aspect-oriented design is the process of designing a system that makes use of aspects to implement the cross-cutting concerns and extensions that are identified during the requirements engineering process. At this stage, you need to translate the concerns that relate to the problem to be solved to corresponding aspects in the program that is implementing the solution. You also need to understand how these aspects will be composed with other system components and ensure that composition ambiguities do not arise.</p>
                                     <p>The high-level statement of requirements provides a basis for identifying some system extensions that may be implemented as aspects. You then need to develop these in more detail to identify further extensions and to understand the functionality that is required. One way to do this is to identify a set of use cases, (discussed in Chapters 4 and 5) associated with each viewpoint. Use case models are interactionfocused and more detailed than the user requirements. You can think of them as a bridge between the requirements and the design. In a use case model, you describe the steps of each user interaction and so start to identify and define the classes in the system.</p>
                                     <img src="./image copy 6.png" alt="">
@@ -433,7 +442,8 @@
                                     <img src="./Screenshot 2025-09-06 165327.png" alt="">
                                     <img src="./Screenshot 2025-09-06 165534.png" alt="">
                                     <p>Developing an effective process for aspect-oriented design is essential if aspect-oriented design is to be accepted and used. I suggest that an aspect-oriented design process should include the activities shown in Figure 21.13. These activities are:</p>
-
+                                </section>
+                                <section>
                                     <ul>
                                         <li>Core system design – At this stage, you design the system architecture to support the core functionality of the system. The architecture must also take into account quality of service requirements such as performance and dependability requirements.</li>
                                         <li>Aspect identification and design – Starting with the extensions identified in the system requirements, you should analyze these to see if they are aspects in themselves or if they should be broken down into several aspects. Once aspects have been identified, these can then be separately designed, taking into account the design of the core system features.</li>
@@ -442,6 +452,8 @@
                                         <li>Name design – This is an important design activity that defines standards for naming entities in the program. This is essential to avoid the problem of accidental pointcuts. These occur when, at some program join point, the name accidentally matches that in a pointcut pattern. The advice is therefore unintentionally applied at that point. Obviously this is undesirable and can lead to unexpected program behavior. Therefore, you should design a naming scheme that minimizes the likelihood of this happening.</li>
                                     </ul>
                                     <img src="./Screenshot 2025-09-06 163329.png" alt="">
+                                </section>
+                                <section>
                      <p>This process is, naturally, an iterative process in which you make initial design proposals then refine them as you analyze and understand the design issues. Normally, you would expect to refine the extensions identified in the requirements to a larger number of aspects.</p>
                          <p>The outcome of the aspect-oriented design process is an aspect-oriented design model. This may be expressed in an extended version of the UML which includes new, aspect-specific constructs such as those proposed by Clarke and Baniassad (2005) and Jacobson and Ng (2004). The essential elements of ‘aspect UML’ are a means of modeling aspects and of specifying the join points at which the aspect advice should be composed with the core system.</p>
                             <p>Figure 21.14 is an example of an aspect-oriented design model. I have used the UML stereotype for an aspect proposed by Jacobson and Ng. Figure 21.14 shows the core system for an emergency services inventory plus some aspects that might be composed with that core. I have shown some core system classes and some aspects. This is a simplified picture; a complete model would include more classes and aspects. Notice how I have used UML notes to provide additional information about the classes that are cross-cut by some aspects.</p>
@@ -465,6 +477,8 @@
                                     <ul>
                                     <li>How can knowledge of the program code be used to systematically derive program tests?</li>
                                     <li>What exactly does test coverage mean?</li>
+                                </section>
+                            <section>
                                     </ul>
                                     <p>To design tests in a structured program (e.g., tests of the code of a method) without unconditional branches, you can derive a program flow graph, which reveals every logical execution path through that program. You then examine the code and, for each path through the flow graph, choose input values that will cause that path to be executed.</p>
                                     <p>However, an aspect-oriented program is not a structured program. The flow of control is interrupted by ‘come from’ statements (Constantinos et al., 2004). At some join point in the execution of the base code, an aspect may be executed. I am not sure that it is possible to construct a structured flow diagram in such a situation.</p>
@@ -481,13 +495,24 @@
                                                 </ul>
                                     <p>Fundamentally, these testing problems occur because aspects are tightly rather than loosely integrated with the base code of a system. They are therefore difficult to test in isolation. Because they may be woven into a program in many different places, you can’t be sure that an aspect that works successfully at one join point will necessarily work at all join points. All of these remain research problems for aspect-oriented software development.</p>
                                 </section>
-                </section>
+        
                             
         </main>
-        <footer>
+            <footer class="aose-footer">
+            <div class="footer-content">
+                <p><strong>Aspect-Oriented Software Engineering (AOSE)</strong></p>
+                <p>Notes and concepts about aspects, cross-cutting concerns, and software engineering principles.</p>
+            </div>
 
-        </footer>
-    
+            <nav class="footer-links">
+                <a href="#top">Back to Top</a>
+                <a href="#">Contact</a>
+                <a href="#">More Resources</a>
+            </nav>
+
+            <p class="footer-copy">© 2025 AOSE Study Guide. All Rights Reserved.</p>
+            </footer>
+            
         </body>
     </head>
 </html>
